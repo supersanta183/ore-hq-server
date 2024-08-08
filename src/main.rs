@@ -13,6 +13,9 @@ use tower_http::trace::{DefaultMakeSpan, TraceLayer};
 use tracing::{debug, error, info};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
+use send_and_confirm::{send_and_confirm_tx, ComputeBudget};
+
+mod send_and_confirm;
 
 const MIN_DIFF: u32 = 8;
 const MIN_HASHPOWER: u64 = 5;
@@ -270,7 +273,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                         for i in 0..3 {
                             info!("Sending signed tx...");
                             info!("attempt: {}", i + 1);
-                            let sig = rpc_client.send_and_confirm_transaction(&tx).await;
+                            let compute_budget = 100000;
+                            let sig = send_and_confirm_tx(&ixs, ComputeBudget::Fixed(compute_budget), false, 100_000, &signer, rpc_client.clone()).await;
+                            //let sig2 = rpc_client.send_and_confirm_transaction(&tx).await;
                             if let Ok(sig) = sig {
                                 // success
                                 info!("Success!!");

@@ -876,6 +876,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "colored"
+version = "2.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cbf2150cce219b664a8a70df7a1f933836724b503f8a413af9365b4dcc4d90b8"
+dependencies = [
+ "lazy_static",
+ "windows-sys 0.48.0",
+]
+
+[[package]]
 name = "combine"
 version = "3.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2550,6 +2560,7 @@ dependencies = [
  "axum",
  "axum-extra",
  "bincode",
+ "colored",
  "crossbeam-channel",
  "dotenv",
  "drillx",
@@ -2560,7 +2571,9 @@ dependencies = [
  "serde",
  "serde_json",
  "solana-client",
+ "solana-rpc-client",
  "solana-sdk",
+ "solana-transaction-status",
  "spl-associated-token-account",
  "tokio",
  "tower",
