@@ -272,7 +272,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
                         tx.sign(&[&signer], hash);
                         
-                        for i in 0..3 {
+                        for i in 0..20 {
                             info!("Sending signed tx...");
                             info!("attempt: {}", i + 1);
                             let compute_budget = 100000;
