@@ -62,7 +62,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // load envs
     let wallet_path_str = std::env::var("WALLET_PATH").expect("WALLET_PATH must be set.");
-    let rpc_url = std::env::var("RPC_URL").expect("RPC_URL must be set.");
+    let rpc_url = String::from("https://api.mainnet-beta.solana.com");
+    let rpc2_url = std::env::var("RPC_URL").expect("RPC_URL must be set.");
     let password = std::env::var("PASSWORD").expect("PASSWORD must be set.");
 
     // load wallet
@@ -78,6 +79,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("establishing rpc connection...");
     let rpc_client = RpcClient::new_with_commitment(rpc_url, CommitmentConfig::confirmed());
+    let rpc2_client = RpcClient::new_with_commitment(rpc2_url, CommitmentConfig::confirmed());
 
     println!("loading sol balance...");
     let balance = if let Ok(balance) = rpc_client.get_balance(&wallet.pubkey()).await {
@@ -275,7 +277,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                             info!("attempt: {}", i + 1);
                             let compute_budget = 100000;
                             //let sig = send_and_confirm_tx(&ixs, ComputeBudget::Fixed(compute_budget), false, 700000, &signer, rpc_client.clone()).await;
-                            let sig = rpc_client.send_and_confirm_transaction(&tx).await;
+                            let sig = rpc2_client.send_and_confirm_transaction(&tx).await;
                             if let Ok(sig) = sig {
                                 // success
                                 info!("Success!!");
