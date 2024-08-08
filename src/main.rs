@@ -274,8 +274,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                             info!("Sending signed tx...");
                             info!("attempt: {}", i + 1);
                             let compute_budget = 100000;
-                            let sig = send_and_confirm_tx(&ixs, ComputeBudget::Fixed(compute_budget), false, 700000, &signer, rpc_client.clone()).await;
-                            //let sig2 = rpc_client.send_and_confirm_transaction(&tx).await;
+                            //let sig = send_and_confirm_tx(&ixs, ComputeBudget::Fixed(compute_budget), false, 700000, &signer, rpc_client.clone()).await;
+                            let sig = rpc_client.send_and_confirm_transaction(&tx).await;
                             if let Ok(sig) = sig {
                                 // success
                                 info!("Success!!");
