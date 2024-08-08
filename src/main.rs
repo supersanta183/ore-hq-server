@@ -249,11 +249,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let signer = app_wallet.clone();
                     let mut ixs = vec![];
                     // TODO: set cu's
-                    //let cu_limit_ix = ComputeBudgetInstruction::set_compute_unit_limit(480_000);
-                    //ixs.push(cu_limit_ix);
+                    let cu_limit_ix = ComputeBudgetInstruction::set_compute_unit_limit(480_000);
+                    ixs.push(cu_limit_ix);
 
-                    //let prio_fee_ix = ComputeBudgetInstruction::set_compute_unit_price(100_000);
-                    //ixs.push(prio_fee_ix);
+                    let prio_fee_ix = ComputeBudgetInstruction::set_compute_unit_price(100_000);
+                    ixs.push(prio_fee_ix);
 
                     let noop_ix = get_auth_ix(signer.pubkey());
                     ixs.push(noop_ix);

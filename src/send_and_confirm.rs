@@ -52,13 +52,13 @@ pub async fn send_and_confirm_tx(
     match compute_budget {
         ComputeBudget::Dynamic => {
             // TODO simulate
-            final_ixs.push(ComputeBudgetInstruction::set_compute_unit_limit(1_400_000))
+            //final_ixs.push(ComputeBudgetInstruction::set_compute_unit_limit(1_400_000))
         }
         ComputeBudget::Fixed(cus) => {
-            final_ixs.push(ComputeBudgetInstruction::set_compute_unit_limit(cus))
+            //final_ixs.push(ComputeBudgetInstruction::set_compute_unit_limit(cus))
         }
     }
-    final_ixs.push(ComputeBudgetInstruction::set_compute_unit_price(priority_fee));
+    //final_ixs.push(ComputeBudgetInstruction::set_compute_unit_price(priority_fee));
     final_ixs.extend_from_slice(ixs);
 
     // Build tx
