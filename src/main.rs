@@ -254,7 +254,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let cu_limit_ix = ComputeBudgetInstruction::set_compute_unit_limit(480_000);
                     ixs.push(cu_limit_ix);
 
-                    let prio_fee_ix = ComputeBudgetInstruction::set_compute_unit_price(700_000);
+                    let prio_fee_ix = ComputeBudgetInstruction::set_compute_unit_price(50000);
                     ixs.push(prio_fee_ix);
 
                     let noop_ix = get_auth_ix(signer.pubkey());
