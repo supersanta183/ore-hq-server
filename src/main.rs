@@ -254,7 +254,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let cu_limit_ix = ComputeBudgetInstruction::set_compute_unit_limit(480_000);
                     ixs.push(cu_limit_ix);
 
-                    let prio_fee_ix = ComputeBudgetInstruction::set_compute_unit_price(50000);
+                    let difficulty = solution.to_hash().difficulty();
+                    let mut transaction_fee = 0;
+                    if difficulty < 22 {
+                        transaction_fee = 100000;
+                    } else {
+                        transaction_fee = 200000;
+                    }
+
+                    let prio_fee_ix = ComputeBudgetInstruction::set_compute_unit_price(transaction_fee);
                     ixs.push(prio_fee_ix);
 
                     let noop_ix = get_auth_ix(signer.pubkey());
@@ -262,7 +270,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
                     // TODO: choose a bus
                     let bus = 4;
-                    let difficulty = solution.to_hash().difficulty();
 
                     let ix_mine = get_mine_ix(signer.pubkey(), solution, bus);
                     ixs.push(ix_mine);
