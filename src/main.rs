@@ -65,6 +65,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let rpc_url = String::from("https://api.mainnet-beta.solana.com");
     let rpc2_url = std::env::var("RPC_URL").expect("RPC_URL must be set.");
     let password = std::env::var("PASSWORD").expect("PASSWORD must be set.");
+    let port = std::env::var("PORT").expect("3000");
 
     // load wallet
     let wallet_path = Path::new(&wallet_path_str);
@@ -258,9 +259,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
                     let mut transaction_fee = 0;
                     if difficulty < 24 {
-                        transaction_fee = 50000;
-                    } else {
                         transaction_fee = 100000;
+                    } else {
+                        transaction_fee = 200000;
                     }
 
                     let prio_fee_ix = ComputeBudgetInstruction::set_compute_unit_price(transaction_fee);
@@ -401,7 +402,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         );
 
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")
+    let ip = "0.0.0.0:";
+    let final_ip = ip.to_owned() + &port;
+    let listener = tokio::net::TcpListener::bind(final_ip)
         .await
         .unwrap();
 
