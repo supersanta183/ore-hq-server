@@ -258,9 +258,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
                     let mut transaction_fee = 0;
                     if difficulty < 24 {
-                        transaction_fee = 50000;
+                        transaction_fee = 20000;
                     } else {
-                        transaction_fee = 100000;
+                        transaction_fee = 50000;
                     }
 
                     let prio_fee_ix = ComputeBudgetInstruction::set_compute_unit_price(transaction_fee);
