@@ -17,7 +17,7 @@ use send_and_confirm::{send_and_confirm_tx, ComputeBudget};
 
 mod send_and_confirm;
 
-const MIN_DIFF: u32 = 8;
+const MIN_DIFF: u32 = 1;
 const MIN_HASHPOWER: u64 = 5;
 
 
