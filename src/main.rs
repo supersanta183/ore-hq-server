@@ -255,11 +255,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     ixs.push(cu_limit_ix);
 
                     let difficulty = solution.to_hash().difficulty();
+
                     let mut transaction_fee = 0;
                     if difficulty < 22 {
-                        transaction_fee = 100000;
+                        transaction_fee = 50000;
                     } else {
-                        transaction_fee = 200000;
+                        transaction_fee = 100000;
                     }
 
                     let prio_fee_ix = ComputeBudgetInstruction::set_compute_unit_price(transaction_fee);
